@@ -6,53 +6,11 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:53 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/10 16:11:05 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:16:21 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./philosophers.h"
-
-int	check_inputs(char *str[])
-{
-	int	i;
-
-	if (ft_atoi(str[1]) < 1 || ft_atoi(str[1]) > 200)
-	{
-		ft_putstr_fd("Invalid numbers of philosophers\n", 2);
-		return (1);
-	}
-	i = 0;
-	while (++i < 5)
-	{
-		if (ft_atoi(str[i]) < 60)
-		{
-			ft_putstr_fd("Invalid numbers of time\n", 2);
-			return (1);
-		}
-	}
-	return (0);
-}
-
-int	check_error(char *str[])
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = -1;
-	while (str[++i])
-	{
-		while (str[i][++j])
-		{
-			if (check_num(&str[i][j]) == 1)
-				return (1);
-		}
-		j = -1;
-	}
-	if (check_inputs(str) == 1)
-		return (1);
-	return (0);
-}
 
 int	main(int argc, char *argv[])
 {

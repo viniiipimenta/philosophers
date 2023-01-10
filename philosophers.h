@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:10:20 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/10 16:07:34 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:15:00 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ typedef struct s_data
 
 int			check_num(char *num);
 int			check_limit(long num);
+int			check_error(char *str[]);
 
 #endif
