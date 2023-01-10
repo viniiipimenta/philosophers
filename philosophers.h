@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:10:20 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/10 15:00:25 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:19:33 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_data
     int		numbers_philos;
 }			t_data;
 
-int			check_num(char *num);
-void		check_limit(long num);
+int	check_num(char *num);
+int	check_limit(long num);
 
 #endif

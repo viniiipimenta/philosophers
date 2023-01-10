@@ -6,13 +6,13 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:53 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/10 13:42:37 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:57:04 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./philosophers.h"
 
-void	check_error(char *str[])
+int	check_error(char *str[])
 {
 	int	i;
 	int	j;
@@ -23,7 +23,8 @@ void	check_error(char *str[])
 	{
 		while (str[i][j])
 		{
-			check_num(&str[i][j]);
+			if (check_num(&str[i][j]) == 1)
+				return (1);
 			j++;
 		}
 		i++;
@@ -32,7 +33,7 @@ void	check_error(char *str[])
     if (ft_atoi(str[1]) < 1 || ft_atoi(str[1]) > 200)
     {
         ft_putstr_fd("Invalid numbers of philosophers\n", 2);
-		exit(0);
+		return (1);
     }
     i = 1;
     while (i < 5)
@@ -40,21 +41,23 @@ void	check_error(char *str[])
         if (ft_atoi(str[i]) < 60)
         {
             ft_putstr_fd("Invalid numbers of time\n", 2);
-		    exit(0);
+		    return (1);
         }
         i++;
     }
+	return (0);
 }
 
 int	main(int argc, char *argv[])
 {
 	if (argc == 5 || argc == 6)
 	{
-		check_error(argv);
+		if (check_error(argv) == 1)
+			return (0);
 		if (argc  == 6 && atoi(argv[5]) < 1)
 		{
 			ft_putstr_fd("Invalid numbers of time to eat\n", 2);
-		    exit(0);
+		    return (0);
 		}
 
 	}

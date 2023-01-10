@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 10:33:51 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/10 10:31:44 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:54:01 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	ft_atoi(const char *str)
 	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
 		|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f')
 		i++;
-	if (str[i] == '-')
-		signal = -1;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	while (str[i] >= 48 && str[i] <= 57)
@@ -37,6 +35,7 @@ int	ft_atoi(const char *str)
 		result = (str[i] - 48) + (result * 10);
 		i++;
 	}
-	check_limit(result * signal);
+	if (check_limit(result * signal) == 1)
+		return (-1);
 	return (result * signal);
 }
