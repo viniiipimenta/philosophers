@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:19:32 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/10 15:58:12 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:02:43 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_num(char *num)
 			return (1);
 		}
 		if ((num[i + 1] == '+' && (num[i] >= '0' && num[i] <= '9'))
-				|| (num[i] == '+' && !num[i + 1]))
+			|| (num[i] == '+' && !num[i + 1]))
 		{
 			ft_putstr_fd("Input just valid numbers\n", 2);
 			return (1);
