@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:10:20 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/16 14:52:18 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/16 17:03:15 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <pthread.h>
 
 typedef struct s_philo
 {
-	int		id;
-	int		count_eat;
-	int		right_hand;
-	int		left_hand;
-	long	last_ate;
+	int				id;
+	int				count_eat;
+	int				right_hand;
+	int				left_hand;
+	long			last_ate;
+	pthread_t		thread_id;
+	struct s_data	*data;
 }			t_philo;
 
 typedef struct s_data
@@ -41,5 +44,7 @@ typedef struct s_data
 int			check_num(char *num);
 int			check_limit(long num);
 int			check_error(char *str[]);
+void		create_forks(t_data *data);
+void		init_threads(t_data *data);
 
 #endif
