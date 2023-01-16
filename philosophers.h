@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:10:20 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/10 16:15:00 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:52:18 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "./libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_philo
 {
@@ -28,13 +29,13 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-	t_philo	*philo;
-	int		*forks;
-	int		time_die;
-	int		time_eat;
-	int		time_sleep;
-	int		must_eat;
-	int		numbers_philos;
+	t_philo			*philo;
+	pthread_mutex_t	*forks;
+	int				die;
+	int				eat;
+	int				sleep;
+	int				must_eat;
+	int				num_philos;
 }			t_data;
 
 int			check_num(char *num);

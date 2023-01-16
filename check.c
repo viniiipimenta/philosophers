@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:19:32 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/10 16:14:46 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/16 10:14:10 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_inputs(char *str[])
 		ft_putstr_fd("Invalid numbers of philosophers\n", 2);
 		return (1);
 	}
-	i = 0;
+	i = 1;
 	while (++i < 5)
 	{
 		if (ft_atoi(str[i]) < 60)
