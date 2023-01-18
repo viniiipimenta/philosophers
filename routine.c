@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:37:56 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/18 10:38:19 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:00:49 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	*routine(void *d)
 	while (!philo->data->if_die)
 	{
 		printing(data, philo);
+		
 	}
 	return (0);
 }
