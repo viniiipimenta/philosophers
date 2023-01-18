@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mutex.c                                            :+:      :+:    :+:   */
+/*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 16:23:40 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/18 13:17:43 by mpimenta         ###   ########.fr       */
+/*   Created: 2023/01/18 13:04:37 by mpimenta          #+#    #+#             */
+/*   Updated: 2023/01/18 13:24:41 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	create_forks(t_data *data)
+void    check_ate_time(t_data *data, t_philo *philo)
 {
-	int	i;
-
-	i = data->num_philos;
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philos);
-	while (--i >= 0)
-		pthread_mutex_init(&data->forks[i], NULL);
-}
-
-void	destroy_forks(t_data *data)
-{
-	int	i;
-
-	i = data->num_philos;
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philos);
-	while (--i >= 0)
-		pthread_mutex_destroy(&(data->forks[i]));
+    if (philo->count_eat == data->must_eat && data->must_eat > 0)
+        data->dead = 1;
 }

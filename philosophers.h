@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:10:20 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/18 10:42:06 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:16:40 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_data
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 	int				die;
-	int				if_die;
+	int				dead;
 	int				eat;
 	int				sleep;
 	int				must_eat;
@@ -48,5 +48,6 @@ int			check_error(char *str[]);
 void		create_forks(t_data *data);
 void		init_threads(t_data *data);
 void		destroy_forks(t_data *data);
+void	    check_ate_time(t_data *data, t_philo *philo);
 
 #endif

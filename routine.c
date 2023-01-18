@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:37:56 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/18 13:00:49 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:24:27 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	printing(t_data *data, t_philo *philo)
 	printf("%d is eating\n", philo->id);
 	usleep(data->eat);
 	philo->count_eat++;
+	check_ate_time(data, philo);
 	pthread_mutex_unlock(&(data->forks[philo->right_hand]));
 	pthread_mutex_unlock(&(data->forks[philo->left_hand]));
 	printf("%d is sleeping\n", philo->id);
@@ -37,10 +38,9 @@ void	*routine(void *d)
 	data = philo->data;
 	if (philo->id % 2 == 0)
 		usleep(1000);
-	while (!philo->data->if_die)
+	while (!philo->data->dead)
 	{
 		printing(data, philo);
-		
 	}
 	return (0);
 }

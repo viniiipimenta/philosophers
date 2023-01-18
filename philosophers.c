@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:53 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/18 10:43:27 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:17:06 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char *argv[])
 			ft_putstr_fd("Invalid numbers of time to eat\n", 2);
 			return (0);
 		}
-		data.if_die = 0;
+		data.dead = 0;
 		set_philos(&data, argv);
 		init_threads(&data);
 		destroy_forks(&data);

@@ -1,7 +1,7 @@
 NAME = philosophers
 
 
-SRCS = philosophers.c check.c mutex.c routine.c
+SRCS = philosophers.c check.c mutex.c routine.c monitor.c
 
 
 CC		= cc
