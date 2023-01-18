@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:37:56 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/18 15:13:30 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:42:50 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,21 @@
 void	printing(t_data *data, t_philo *philo)
 {
 	pthread_mutex_lock(&(data->forks[philo->right_hand]));
-	printf("%ld %d has taken a fork\n", (get_time() - data->start_time),
+	printf("%ldms %d has taken a fork\n", (get_time() - data->start_time),
 		philo->id);
 	pthread_mutex_lock(&(data->forks[philo->left_hand]));
-	printf("%ld %d has taken a fork\n", (get_time() - data->start_time),
+	printf("%ldms %d has taken a fork\n", (get_time() - data->start_time),
 		philo->id);
-	printf("%ld %d is eating\n", (get_time() - data->start_time), philo->id);
-	usleep(data->eat);
+	printf("%ldms %d is eating\n", (get_time() - data->start_time), philo->id);
 	philo->count_eat++;
+	philo->last_ate = get_time() - data->start_time;
+	usleep(data->eat * 1000);
 	check_ate_time(data, philo);
 	pthread_mutex_unlock(&(data->forks[philo->right_hand]));
 	pthread_mutex_unlock(&(data->forks[philo->left_hand]));
-	printf("%ld %d is sleeping\n", (get_time() - data->start_time), philo->id);
-	usleep(data->sleep);
-	printf("%ld %d is thinking\n", (get_time() - data->start_time), philo->id);
+	printf("%ldms %d is sleeping\n", (get_time() - data->start_time), philo->id);
+	usleep(data->sleep * 1000);
+	printf("%ldms %d is thinking\n", (get_time() - data->start_time), philo->id);
 }
 
 void	*routine(void *d)

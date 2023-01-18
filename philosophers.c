@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:53 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/18 15:12:28 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:32:35 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	set_philos(t_data *data, char **argv)
 
 	i = 0;
 	data->num_philos = ft_atoi(argv[1]);
-	data->die = ft_atoi(argv[2]) * 1000;
-	data->eat = ft_atoi(argv[3]) * 1000;
-	data->sleep = ft_atoi(argv[4]) * 1000;
+	data->die = ft_atoi(argv[2]);
+	data->eat = ft_atoi(argv[3]);
+	data->sleep = ft_atoi(argv[4]);
 	if (argv[5])
 	{
 		data->must_eat = ft_atoi(argv[5]);
@@ -34,7 +34,7 @@ void	set_philos(t_data *data, char **argv)
 		data->philo[i].count_eat = 0;
 		data->philo[i].right_hand = i;
 		data->philo[i].left_hand = (1 + i) % data->num_philos;
-		data->philo[i].last_ate = 0;
+		data->philo[i].last_ate = get_time();
 		data->philo[i].data = data;
 		i++;
 	}

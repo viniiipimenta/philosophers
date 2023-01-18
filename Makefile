@@ -1,7 +1,7 @@
 NAME = philosophers
 
 
-SRCS = philosophers.c check.c mutex.c routine.c monitor.c
+SRCS = philosophers.c check.c mutex.c routine.c monitor.c ft_atoi.c ft_isdigit.c ft_putstr_fd.c ft_putchar_fd.c
 
 
 CC		= cc
@@ -14,8 +14,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 
 $(NAME): ${OBJS}
-		make -C ./libft
-		${CC} ${CFLAGS} ./libft/libft.a $(SRCS) -o $(NAME)
+		${CC} ${CFLAGS} $(SRCS) -o $(NAME)
 
 
 all:	${NAME}
@@ -23,16 +22,13 @@ all:	${NAME}
 
 clean:
 		${RM} ${OBJS}
-		make clean -C ./libft
 
 
 fclean:	clean
 		${RM} ${NAME}
-		make fclean -C ./libft
 
 
 re:		fclean all
-		make re -C ./libft
 
 
 .PHONY: all clean fclean re
