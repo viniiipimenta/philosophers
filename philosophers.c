@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:53 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/18 13:17:06 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/18 15:12:28 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	set_philos(t_data *data, char **argv)
 
 int	main(int argc, char *argv[])
 {
-	t_data	data;
+	t_data			data;
 
 	if (argc == 5 || argc == 6)
 	{
@@ -54,10 +54,13 @@ int	main(int argc, char *argv[])
 			ft_putstr_fd("Invalid numbers of time to eat\n", 2);
 			return (0);
 		}
+		data.start_time = get_time();
 		data.dead = 0;
+		data.dinner_finish = 0;
 		set_philos(&data, argv);
 		init_threads(&data);
 		destroy_forks(&data);
+		free(data.philo);
 	}
 	else
 		ft_putstr_fd("Number of arguments invalid\n", 2);

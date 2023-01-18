@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:23:40 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/18 13:17:43 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/18 14:51:35 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	destroy_forks(t_data *data)
 	int	i;
 
 	i = data->num_philos;
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philos);
 	while (--i >= 0)
 		pthread_mutex_destroy(&(data->forks[i]));
+	free(data->forks);
 }
