@@ -6,25 +6,37 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:04:37 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/18 16:35:56 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/19 17:07:01 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	check_ate_time(t_data *data, t_philo *philo)
+int	check_ate_time(t_data *data, t_philo *philo)
 {
+	pthread_mutex_lock(&(data->check_eat));
 	if (philo->count_eat == data->must_eat && data->must_eat > 0)
+	{
 		data->dinner_finish = 1;
+		pthread_mutex_lock(&(data->check_eat));
+		return (1);
+	}
+	pthread_mutex_unlock(&(data->check_eat));
+	return (0);
 }
 
-void	check_if_dead(t_data *data, t_philo *philo)
+int	check_if_dead(t_data *data, t_philo *philo)
 {
-	if (data->die >= (get_time() - data->start_time) - philo->last_ate)
+	if (data->dead >= 1)
+		return (1);
+	if (data->die <= get_time() - philo->last_ate)
 	{
-		data->dead = 1;
-		printf("%ldms %d Died\n", get_time() - data->start_time, philo->id);
+		data->dead++;
+		if (!data->dinner_finish && data->dead == 1)
+			printf("%ldms\t%d\tDied\n", get_time() - data->start_time, philo->id);
+		return (1);
 	}
+	return (0);
 }
 
 long	get_time(void)

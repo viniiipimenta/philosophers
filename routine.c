@@ -6,30 +6,62 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:37:56 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/18 16:42:50 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/19 17:07:30 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	printing(t_data *data, t_philo *philo)
+void	eat(t_data *data, t_philo *philo)
 {
 	pthread_mutex_lock(&(data->forks[philo->right_hand]));
-	printf("%ldms %d has taken a fork\n", (get_time() - data->start_time),
-		philo->id);
+	if (!data->dinner_finish && !data->dead)
+		printf("%ldms\t%d\thas taken a fork\n", (get_time() - data->start_time),
+			philo->id);
 	pthread_mutex_lock(&(data->forks[philo->left_hand]));
-	printf("%ldms %d has taken a fork\n", (get_time() - data->start_time),
-		philo->id);
-	printf("%ldms %d is eating\n", (get_time() - data->start_time), philo->id);
+	if (!data->dinner_finish && !data->dead)
+		printf("%ldms\t%d\thas taken a fork\n", (get_time() - data->start_time),
+			philo->id);
+	if (check_if_dead(data, philo) == 1 || data->dead == 1)
+	{
+		pthread_mutex_unlock(&(data->forks[philo->right_hand]));
+		pthread_mutex_unlock(&(data->forks[philo->left_hand]));
+		return ;
+	}
+	if (!data->dinner_finish && !data->dead)
+		printf("%ldms\t%d\tis eating\n", (get_time() - data->start_time),
+			philo->id);
 	philo->count_eat++;
-	philo->last_ate = get_time() - data->start_time;
+	philo->last_ate = get_time();
 	usleep(data->eat * 1000);
-	check_ate_time(data, philo);
 	pthread_mutex_unlock(&(data->forks[philo->right_hand]));
 	pthread_mutex_unlock(&(data->forks[philo->left_hand]));
-	printf("%ldms %d is sleeping\n", (get_time() - data->start_time), philo->id);
+}
+
+void	doing_routine(t_data *data, t_philo *philo)
+{
+	if (check_if_dead(data, philo) == 1 || data->dead == 1)
+		return ;
+
+
+	eat(data, philo);
+	if (check_ate_time(data, philo) == 1)
+		return ;
+
+
+
+
+	if (check_if_dead(data, philo) == 1 || data->dead == 1)
+		return ;
+	if (!data->dinner_finish && !data->dead)
+		printf("%ldms\t%d\tis sleeping\n", (get_time() - data->start_time),
+			philo->id);
 	usleep(data->sleep * 1000);
-	printf("%ldms %d is thinking\n", (get_time() - data->start_time), philo->id);
+	if (check_if_dead(data, philo) == 1 || data->dead == 1)
+		return ;
+	if (!data->dinner_finish && !data->dead)
+		printf("%ldms\t%d\tis thinking\n", (get_time() - data->start_time),
+			philo->id);
 }
 
 void	*routine(void *d)
@@ -41,9 +73,11 @@ void	*routine(void *d)
 	data = philo->data;
 	if (philo->id % 2 == 0)
 		usleep(1000);
-	while (!data->dead && !data->dinner_finish)
+	while (1)
 	{
-		printing(data, philo);
+		doing_routine(data, philo);
+		if (data->dead || data->dinner_finish)
+			break ;
 	}
 	return (0);
 }
