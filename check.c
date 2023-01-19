@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:19:32 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/19 18:28:45 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:31:46 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_inputs(char *str[])
 	{
 		if (ft_atoi(str[i]) < 60)
 		{
-			printf("Invalid numbers of time\n";
+			printf("Invalid numbers of time\n");
 			return (1);
 		}
 	}

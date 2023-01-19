@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:53 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/19 18:29:04 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:33:27 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_philos(t_data *data, char **argv)
 {
-	int	i;
+	int		i;
 	long	last_ate;
 
 	i = 0;
@@ -24,9 +24,7 @@ void	set_philos(t_data *data, char **argv)
 	data->sleep = ft_atoi(argv[4]);
 	last_ate = get_time();
 	if (argv[5])
-	{
 		data->must_eat = ft_atoi(argv[5]);
-	}
 	else
 		data->must_eat = 0;
 	data->philo = malloc(sizeof(t_philo) * data->num_philos);
@@ -45,7 +43,7 @@ void	set_philos(t_data *data, char **argv)
 
 int	main(int argc, char *argv[])
 {
-	t_data			data;
+	t_data	data;
 
 	if (argc == 5 || argc == 6)
 	{

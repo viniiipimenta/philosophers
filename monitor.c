@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:04:37 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/19 18:14:28 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:32:49 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	check_if_dead(t_data *data, t_philo *philo)
 	{
 		data->dead++;
 		if (!data->dinner_finish && data->dead == 1)
-			printf("%ldms\t%d\tDied\n", get_time() - data->start_time, philo->id);
+			printf("%ldms\t%d\tDied\n", get_time() - data->start_time,
+				philo->id);
 		return (1);
 	}
 	return (0);
@@ -52,8 +53,8 @@ long	get_time(void)
 
 void	smart_sleep(t_data *data, long time)
 {
-	long start;
-	long now;
+	long	start;
+	long	now;
 
 	start = get_time();
 	now = start;
