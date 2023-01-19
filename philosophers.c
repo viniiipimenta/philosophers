@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:53 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/19 14:58:16 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:29:04 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(int argc, char *argv[])
 			return (0);
 		if (argc == 6 && atoi(argv[5]) < 1)
 		{
-			ft_putstr_fd("Invalid numbers of time to eat\n", 2);
+			printf("Invalid numbers of time to eat\n");
 			return (0);
 		}
 		data.start_time = get_time();
@@ -65,6 +65,6 @@ int	main(int argc, char *argv[])
 		free(data.philo);
 	}
 	else
-		ft_putstr_fd("Number of arguments invalid\n", 2);
+		printf("Number of arguments invalid\n");
 	return (0);
 }

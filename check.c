@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:19:32 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/16 10:14:10 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:28:45 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_inputs(char *str[])
 
 	if (ft_atoi(str[1]) < 1 || ft_atoi(str[1]) > 200)
 	{
-		ft_putstr_fd("Invalid numbers of philosophers\n", 2);
+		printf("Invalid numbers of philosophers\n");
 		return (1);
 	}
 	i = 1;
@@ -26,7 +26,7 @@ int	check_inputs(char *str[])
 	{
 		if (ft_atoi(str[i]) < 60)
 		{
-			ft_putstr_fd("Invalid numbers of time\n", 2);
+			printf("Invalid numbers of time\n";
 			return (1);
 		}
 	}
@@ -63,13 +63,13 @@ int	check_num(char *num)
 	{
 		if (ft_isdigit(num[i]) == 0)
 		{
-			ft_putstr_fd("Input just positive numbers\n", 2);
+			printf("Input just positive numbers\n");
 			return (1);
 		}
 		if ((num[i + 1] == '+' && (num[i] >= '0' && num[i] <= '9'))
 			|| (num[i] == '+' && !num[i + 1]))
 		{
-			ft_putstr_fd("Input just valid numbers\n", 2);
+			printf("Input just valid numbers\n");
 			return (1);
 		}
 		i++;

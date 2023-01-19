@@ -1,7 +1,7 @@
 NAME = philosophers
 
 
-SRCS = philosophers.c check.c mutex.c routine.c monitor.c ft_atoi.c ft_isdigit.c ft_putstr_fd.c ft_putchar_fd.c
+SRCS = philosophers.c check.c mutex.c routine.c monitor.c ft_atoi.c ft_isdigit.c
 
 
 CC		= cc

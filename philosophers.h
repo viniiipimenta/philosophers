@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:10:20 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/19 18:13:39 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:29:13 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ typedef struct s_data
 
 int					ft_atoi(const char *str);
 int					ft_isdigit(char c);
-void				ft_putchar_fd(char c, int fd);
-void				ft_putstr_fd(char *s, int fd);
 
 int					check_num(char *num);
 int					check_limit(long num);
