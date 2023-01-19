@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:37:56 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/19 17:46:33 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:18:25 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	eat(t_data *data, t_philo *philo)
 			philo->id);
 	philo->count_eat++;
 	philo->last_ate = get_time();
-	//smart_sleep(data, data->eat * 1000);
-	usleep(data->eat * 1000);
 	pthread_mutex_unlock(&(data->forks[philo->right_hand]));
 	pthread_mutex_unlock(&(data->forks[philo->left_hand]));
 }
@@ -51,8 +49,7 @@ void	doing_routine(t_data *data, t_philo *philo)
 	if (!data->dinner_finish && !data->dead)
 		printf("%ldms\t%d\tis sleeping\n", (get_time() - data->start_time),
 			philo->id);
-	//smart_sleep(data, data->sleep * 1000);
-	usleep(data->sleep * 1000);
+	smart_sleep(data, data->sleep);
 	if (check_if_dead(data, philo) == 1 || data->dead == 1)
 		return ;
 	if (!data->dinner_finish && !data->dead)
@@ -68,7 +65,7 @@ void	*routine(void *d)
 	philo = (t_philo *)d;
 	data = philo->data;
 	if (philo->id % 2 == 0)
-		usleep(1000);
+		usleep(400);
 	while (1)
 	{
 		doing_routine(data, philo);
