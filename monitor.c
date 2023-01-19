@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:04:37 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/19 17:07:01 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/19 17:45:55 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,15 @@ long	get_time(void)
 	current_time = time.tv_sec * 1000;
 	current_time += time.tv_usec / 1000;
 	return (current_time);
+}
+
+void	smart_sleep(t_data *data, long time_to_get)
+{
+	while (time_to_get)
+	{
+		time_to_get -= 50;
+		usleep(50);
+		if (data->dinner_finish || data->dead)
+			break ;
+	}
 }

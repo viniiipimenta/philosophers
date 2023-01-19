@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:10:20 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/19 17:07:37 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/19 17:32:13 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ void				init_threads(t_data *data);
 void				destroy_forks(t_data *data);
 int					check_ate_time(t_data *data, t_philo *philo);
 int					check_if_dead(t_data *data, t_philo *philo);
+void				smart_sleep(t_data *data, long time_to_get);
 
 #endif
