@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:04:37 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/19 18:38:33 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/23 09:48:22 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ long	get_time(void)
 	return (current_time);
 }
 
-void	smart_sleep(t_data *data, long time)
+void	smart_sleep(t_data *data, t_philo *philo, long time)
 {
 	long	start;
 	long	now;
@@ -63,6 +63,8 @@ void	smart_sleep(t_data *data, long time)
 		now = get_time();
 		usleep(400);
 		if (data->dinner_finish || data->dead)
+			break ;
+		if (check_if_dead(data, philo) == 1)
 			break ;
 	}
 }
