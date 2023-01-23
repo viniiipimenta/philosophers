@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:04:37 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/23 14:09:13 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/23 15:44:47 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	check_ate_time(t_data *data, t_philo *philo)
 {
 	pthread_mutex_lock(&(data->check_eat));
-	if (data->dinner_finish == 1)
+	if (data->dinner_finish >= data->num_philos + 2)
 	{
 		pthread_mutex_unlock(&(data->check_eat));
 		return (1);
 	}
-	if (philo->count_eat == data->must_eat && data->must_eat > 0)
+	if (philo->count_eat >= data->must_eat + 2 && data->must_eat > 0)
 	{
-		data->dinner_finish = 1;
+		data->dinner_finish++;
 		pthread_mutex_unlock(&(data->check_eat));
 		return (1);
 	}
@@ -42,7 +42,7 @@ int	check_if_dead(t_data *data, t_philo *philo)
 	{
 		data->dead++;
 		usleep(100);
-		if (check_ate_time(data, philo) == 1 || data->dead == 1)
+		if (check_ate_time(data, philo) == 0 && data->dead == 1)
 		{
 			pthread_mutex_lock(&(data->lock_print));
 			printf("%ldms\t%d\tDied\n", get_time() - data->start_time,
