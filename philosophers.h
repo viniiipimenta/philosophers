@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:10:20 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/23 10:46:44 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/23 13:28:33 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_data
 	int				dead;
 	int				dinner_finish;
 	pthread_mutex_t	check_eat;
+	pthread_mutex_t	check_dead;
+	pthread_mutex_t	lock_print;
 }					t_data;
 
 int					ft_atoi(const char *str);
@@ -58,5 +60,6 @@ void				destroy_forks(t_data *data);
 int					check_ate_time(t_data *data, t_philo *philo);
 int					check_if_dead(t_data *data, t_philo *philo);
 void				smart_sleep(t_data *data, t_philo *philo, long time);
+void				print_msg(t_data *data, t_philo *philo, char way);
 
 #endif

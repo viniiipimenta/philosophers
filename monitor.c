@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:04:37 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/23 09:48:22 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/23 13:52:11 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,15 @@
 int	check_ate_time(t_data *data, t_philo *philo)
 {
 	pthread_mutex_lock(&(data->check_eat));
+	if (data->dinner_finish == 1)
+	{
+		pthread_mutex_unlock(&(data->check_eat));
+		return (1);
+	}
 	if (philo->count_eat == data->must_eat && data->must_eat > 0)
 	{
 		data->dinner_finish = 1;
-		pthread_mutex_lock(&(data->check_eat));
+		pthread_mutex_unlock(&(data->check_eat));
 		return (1);
 	}
 	pthread_mutex_unlock(&(data->check_eat));
@@ -27,16 +32,27 @@ int	check_ate_time(t_data *data, t_philo *philo)
 
 int	check_if_dead(t_data *data, t_philo *philo)
 {
+	pthread_mutex_lock(&(data->check_dead));
 	if (data->dead >= 1)
+	{
+		pthread_mutex_unlock(&(data->check_dead));
 		return (1);
+	}
 	if (data->die <= get_time() - philo->last_ate)
 	{
 		data->dead++;
-		if (!data->dinner_finish && data->dead == 1)
+		usleep(100);
+		if (check_ate_time(data, philo) == 1 || data->dead == 1)
+		{
+			pthread_mutex_lock(&(data->lock_print));
 			printf("%ldms\t%d\tDied\n", get_time() - data->start_time,
 				philo->id);
+			pthread_mutex_unlock(&(data->lock_print));
+		}
+		pthread_mutex_unlock(&(data->check_dead));
 		return (1);
 	}
+	pthread_mutex_unlock(&(data->check_dead));
 	return (0);
 }
 
@@ -62,9 +78,7 @@ void	smart_sleep(t_data *data, t_philo *philo, long time)
 	{
 		now = get_time();
 		usleep(400);
-		if (data->dinner_finish || data->dead)
-			break ;
-		if (check_if_dead(data, philo) == 1)
+		if (check_ate_time(data, philo) == 1 || check_if_dead(data, philo) == 1)
 			break ;
 	}
 }

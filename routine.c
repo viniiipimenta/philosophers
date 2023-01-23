@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:37:56 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/23 10:59:30 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/23 13:47:32 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	one_philo(t_data *data, t_philo *philo)
 {
 	pthread_mutex_lock(&(data->forks[philo->right_hand]));
-	printf("%ldms\t%d\thas taken a fork\n", (get_time() - data->start_time),
-		philo->id);
+	print_msg(data, philo, 'f');
 	smart_sleep(data, philo, data->die);
 	pthread_mutex_unlock(&(data->forks[philo->right_hand]));
 	check_if_dead(data, philo);
@@ -25,22 +24,16 @@ void	one_philo(t_data *data, t_philo *philo)
 void	eat(t_data *data, t_philo *philo)
 {
 	pthread_mutex_lock(&(data->forks[philo->right_hand]));
-	if (!data->dinner_finish && !data->dead)
-		printf("%ldms\t%d\thas taken a fork\n", (get_time() - data->start_time),
-			philo->id);
+	print_msg(data, philo, 'f');
 	pthread_mutex_lock(&(data->forks[philo->left_hand]));
-	if (!data->dinner_finish && !data->dead)
-		printf("%ldms\t%d\thas taken a fork\n", (get_time() - data->start_time),
-			philo->id);
-	if (check_if_dead(data, philo) == 1 || data->dead == 1)
+	print_msg(data, philo, 'f');
+	if (check_if_dead(data, philo) == 1)
 	{
 		pthread_mutex_unlock(&(data->forks[philo->right_hand]));
 		pthread_mutex_unlock(&(data->forks[philo->left_hand]));
 		return ;
 	}
-	if (!data->dinner_finish && !data->dead)
-		printf("%ldms\t%d\tis eating\n", (get_time() - data->start_time),
-			philo->id);
+	print_msg(data, philo, 'e');
 	philo->count_eat++;
 	philo->last_ate = get_time();
 	smart_sleep(data, philo, data->eat);
@@ -50,22 +43,16 @@ void	eat(t_data *data, t_philo *philo)
 
 void	doing_routine(t_data *data, t_philo *philo)
 {
-	if (check_if_dead(data, philo) == 1 || data->dead == 1)
+	if (check_if_dead(data, philo) == 1)
 		return ;
 	eat(data, philo);
-	if (check_ate_time(data, philo) == 1)
+	if (check_ate_time(data, philo) == 1 || check_if_dead(data, philo) == 1)
 		return ;
-	if (check_if_dead(data, philo) == 1 || data->dead == 1)
-		return ;
-	if (!data->dinner_finish && !data->dead)
-		printf("%ldms\t%d\tis sleeping\n", (get_time() - data->start_time),
-			philo->id);
+	print_msg(data, philo, 's');
 	smart_sleep(data, philo, data->sleep);
-	if (check_if_dead(data, philo) == 1 || data->dead == 1)
+	if (check_if_dead(data, philo) == 1)
 		return ;
-	if (!data->dinner_finish && !data->dead)
-		printf("%ldms\t%d\tis thinking\n", (get_time() - data->start_time),
-			philo->id);
+	print_msg(data, philo, 's');
 }
 
 void	*routine(void *d)
@@ -85,7 +72,7 @@ void	*routine(void *d)
 	while (1)
 	{
 		doing_routine(data, philo);
-		if (data->dead || data->dinner_finish)
+		if (check_if_dead(data, philo) == 1 || check_ate_time(data, philo) == 1)
 			break ;
 	}
 	return (0);
