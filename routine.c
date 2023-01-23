@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:37:56 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/23 14:32:24 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/23 14:37:54 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void	init_threads(t_data *data)
 	while (++i < data->num_philos)
 		pthread_create(&(data->philo[i].thread_id), NULL, &routine,
 			&(data->philo[i]));
-	while(1)
+	while (1)
 	{
 		i = -1;
-		while(++i < data->num_philos)
+		while (++i < data->num_philos)
 			check_if_dead(data, &data->philo[i]);
 		if (data->dead > 0)
 			break ;
