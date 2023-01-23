@@ -6,11 +6,21 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:37:56 by mpimenta          #+#    #+#             */
-/*   Updated: 2023/01/23 09:51:37 by mpimenta         ###   ########.fr       */
+/*   Updated: 2023/01/23 10:59:30 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	one_philo(t_data *data, t_philo *philo)
+{
+	pthread_mutex_lock(&(data->forks[philo->right_hand]));
+	printf("%ldms\t%d\thas taken a fork\n", (get_time() - data->start_time),
+		philo->id);
+	smart_sleep(data, philo, data->die);
+	pthread_mutex_unlock(&(data->forks[philo->right_hand]));
+	check_if_dead(data, philo);
+}
 
 void	eat(t_data *data, t_philo *philo)
 {
@@ -65,6 +75,11 @@ void	*routine(void *d)
 
 	philo = (t_philo *)d;
 	data = philo->data;
+	if (data->num_philos == 1)
+	{
+		one_philo(data, philo);
+		return (0);
+	}
 	if (philo->id % 2 == 0)
 		usleep(400);
 	while (1)
