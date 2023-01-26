@@ -52,7 +52,7 @@ void	doing_routine(t_data *data, t_philo *philo)
 	smart_sleep(data, philo, data->sleep);
 	if (check_if_dead(data, philo) == 1)
 		return ;
-	print_msg(data, philo, 's');
+	print_msg(data, philo, 't');
 }
 
 void	*routine(void *d)
